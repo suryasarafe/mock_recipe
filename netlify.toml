@@ -1,4 +1,7 @@
 [build]
-functions="functions"
-command = ""
-publish = ""
+  functions = "functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/api"
+  status = 200
