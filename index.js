@@ -1,7 +1,7 @@
 const express = require('express');
 const faker = require('faker');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 const { foodNames } = require('./data/foodname');
 const { ingredients } = require('./data/inggredients');
 
