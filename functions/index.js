@@ -1,9 +1,12 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const faker = require('faker');
 const app = express();
+const router = express.Router();
+
 const PORT = process.env.PORT || 80;
-const { foodNames } = require('./data/foodname');
-const { ingredients } = require('./data/inggredients');
+const { foodNames } = require('../data/foodname');
+const { ingredients } = require('../data/inggredients');
 
 const generateIngredient = () => {
   const count = faker.datatype.number({ min: 2, max: 20 });
@@ -102,11 +105,11 @@ const reductedResponse = (data, options) => {
 }
 app.use(express.json());
 
-app.get('', (req, res)=> {
+router.get('/', (req, res)=> {
   res.json({hello: 'wordl!'});
 });
 
-app.get('/costum', (req, res) => {
+router.get('/costum', (req, res) => {
   const count = req.query.count || 1;
   const keyString = req.query.keys || 'id,title,description,ingredients,instructions,preparationTime,cookingTime,servings,nutritionalInformation,tags,thumbnail,image';
   const keys = keyString.split(',');
@@ -115,7 +118,7 @@ app.get('/costum', (req, res) => {
   res.json(reducted);
 });
 
-app.get('/list', (req, res) => {
+router.get('/list', (req, res) => {
   const count = req.query.count || 10;
   const keyString = 'id,title,description,tags';
   const keys = keyString.split(',');
@@ -124,6 +127,10 @@ app.get('/list', (req, res) => {
   res.json(reducted);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
+// app.use('/', router);
+
+app.use('/.netlify/functions/index', router);
+module.exports.handler = serverless(app);
