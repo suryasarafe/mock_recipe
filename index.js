@@ -102,6 +102,9 @@ const reductedResponse = (data, options) => {
 }
 app.use(express.json());
 
+app.get('', (req, res)=> {
+  res.json({hello: 'wordl!'});
+});
 
 app.get('/costum', (req, res) => {
   const count = req.query.count || 1;

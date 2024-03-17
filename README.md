@@ -1,4 +1,4 @@
-# json-generator-api
+# json-generator-api [![Netlify Status](https://api.netlify.com/api/v1/badges/519507f5-0375-43bc-a360-bc0051ae6216/deploy-status)](https://app.netlify.com/sites/saerecipe/deploys)
 make mock api for make recipe page
 
 ## Usage
